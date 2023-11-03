@@ -1,11 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-
-var urlencodedParser = bodyParser.urlencoded({ extended: false });
-
-
 const app = express();
+
+var jsonParser = bodyParser.json();
+
+app.use(jsonParser);
 
 const models = require('./models/index');
 const syncTable = async () => {

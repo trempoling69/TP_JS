@@ -1,0 +1,165 @@
+{
+	"info": {
+		"_postman_id": "fd46f423-4831-4eab-a67d-0182577153be",
+		"name": "apiVols",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30743087"
+	},
+	"item": [
+		{
+			"name": "Consultation des vols",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/flight",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"flight"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "creation de vols",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"flightNumber\": \"AYIX9\",\r\n    \"origine\": \"LYON\",\r\n    \"destination\": \"MIAMI\",\r\n    \"date\": \"2023-11-03\",\r\n    \"sieges\": {\r\n        \"sieges\": [\r\n            {\"name\": \"A1\", \"statut\": \"Disponible\"},\r\n            {\"name\": \"A2\", \"statut\": \"Disponible\"},\r\n            {\"name\": \"A3\", \"statut\": \"Disponible\"}\r\n        ]\r\n    },\r\n    \"informationAeroplane\": {\r\n        \"model\": \"Airbus A380\",\r\n        \"capacity\": 208\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/flight",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"flight"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mise à jour de Vols",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"flightNumber\": \"AYIX9\",\r\n    \"origine\": \"LYON\",\r\n    \"destination\": \"NEW YORK\",\r\n    \"date\": \"2023-11-03\",\r\n    \"sieges\": {\r\n        \"sieges\": [\r\n            {\"name\": \"A1\", \"statut\": \"Disponible\"},\r\n            {\"name\": \"A2\", \"statut\": \"Disponible\"},\r\n            {\"name\": \"A3\", \"statut\": \"Disponible\"}\r\n        ]\r\n    },\r\n    \"informationAeroplane\": {\r\n        \"model\": \"Airbus A380\",\r\n        \"capacity\": 208\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/flight/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"flight",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "suppression de vol",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/flight/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"flight",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultation de l’état d’un siege",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/flight/ABC123/seats/A1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"flight",
+						"ABC123",
+						"seats",
+						"A1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mise à jour des Sièges",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"A1\",\r\n    \"statut\":\"disponible\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/flight/DEF456/seats/A1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"flight",
+						"DEF456",
+						"seats",
+						"A1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

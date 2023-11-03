@@ -12,7 +12,7 @@ const getFlightByNumber = async (req, res) => {
 
     // Rechercher les vols en fonction du numéro de vol
     const vols = await Vol.findAll({
-      where: { flightNumber }
+      where: { flightNumber },
     });
 
     if (vols.length === 0) {
@@ -30,14 +30,7 @@ const getFlightByNumber = async (req, res) => {
 const createFlight = async (req, res) => {
   try {
     // Récupérer les données du corps de la demande
-    const {
-      flightNumber,
-      origine,
-      destination,
-      date,
-      sieges,
-      informationAeroplane
-    } = req.body;
+    const { flightNumber, origine, destination, date, sieges, informationAeroplane } = req.body;
 
     // Créer un nouveau vol en utilisant le modèle Sequelize
     const newVol = await Vol.create({
@@ -46,7 +39,7 @@ const createFlight = async (req, res) => {
       destination,
       date,
       sieges,
-      informationAeroplane
+      informationAeroplane,
     });
 
     // Répondre avec le nouveau vol créé
@@ -69,14 +62,7 @@ const updateFlight = async (req, res) => {
     }
 
     // Mettre à jour les données du vol en utilisant les données du corps de la demande
-    const {
-      flightNumber,
-      origine,
-      destination,
-      date,
-      sieges,
-      informationAeroplane
-    } = req.body;
+    const { flightNumber, origine, destination, date, sieges, informationAeroplane } = req.body;
 
     existingVol.flightNumber = flightNumber;
     existingVol.origine = origine;
@@ -116,7 +102,7 @@ const deleteFlight = async (req, res) => {
     console.error(error);
     res.status(500).json({ error: 'Erreur lors de la suppression du vol' });
   }
-}
+};
 
 const getStatutSeat = async (req, res) => {
   try {
@@ -125,7 +111,7 @@ const getStatutSeat = async (req, res) => {
 
     // Rechercher le vol en fonction du numéro de vol
     const vol = await Vol.findOne({
-      where: { flightNumber }
+      where: { flightNumber },
     });
 
     if (!vol) {
@@ -133,24 +119,68 @@ const getStatutSeat = async (req, res) => {
     }
 
     // Vérifier si le siège existe dans le vol
-    const siegeArray = JSON.parse(vol.sieges).sieges;
+    const siegeArray = vol.sieges.sieges;
 
-    console.log(siegeArray);
     const getsiegeinarray = siegeArray.find((siege) => siege.name === seatName);
-    if (!siegeArray || !getsiegeinarray ) {
+    if (!siegeArray || !getsiegeinarray) {
       return res.status(404).json({ error: 'Siège non trouvé dans ce vol' });
     }
 
     // Répondre avec les informations du siège
     res.json({
       flightNumber: vol.flightNumber,
-      ...getsiegeinarray
+      ...getsiegeinarray,
     });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Erreur lors de la recherche du siège' });
   }
-}
+};
+const updateSeat = async (req, res) => {
+  try {
+    const flightNumber = req.params.flightNumber;
+    const seatName = req.params.seatName;
+    const { name, statut } = req.body;
+    // Rechercher le vol en fonction du numéro de vol
+    const vol = await Vol.findOne({
+      where: { flightNumber },
+    });
 
+    if (!vol) {
+      return res.status(404).json({ error: 'Vol non trouvé' });
+    }
 
-module.exports = { getAllFlight, createFlight, updateFlight, deleteFlight, getFlightByNumber, getStatutSeat };
+    // Vérifier si le siège existe dans le vol
+    const siegeArray = vol.sieges.sieges;
+
+    const getIndexSiegeInArray = siegeArray.findIndex((siege) => siege.name === seatName);
+    if (!siegeArray || getIndexSiegeInArray === -1) {
+      return res.status(404).json({ error: 'Siège non trouvé dans ce vol' });
+    }
+
+    siegeArray.splice(getIndexSiegeInArray, 1);
+    const newVol = {
+      ...vol.dataValues,
+      sieges: { sieges: [...siegeArray, { name, statut }] },
+    };
+
+    //Modifier le vol dans la bdd
+    await Vol.update({ ...newVol }, { where: { id: vol.id } });
+
+    // Répondre avec les informations du siège
+    res.json(newVol);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Erreur lors de la recherche du siège' });
+  }
+};
+
+module.exports = {
+  getAllFlight,
+  createFlight,
+  updateFlight,
+  deleteFlight,
+  getFlightByNumber,
+  getStatutSeat,
+  updateSeat,
+};

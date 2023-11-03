@@ -1,6 +1,6 @@
 {
   "development": {
-    "username": "liam",
+    "username": "root",
     "password": null,
     "database": "apivols",
     "host": "127.0.0.1",

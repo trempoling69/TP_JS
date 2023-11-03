@@ -22,3 +22,8 @@ npx sequelize-cli db:seed:all
 ```
 npm run devStart
 ```
+
+## documentation des routes
+
+liste de toutes les routes et body attendu dans les requêtes disponible directement dans le fichier json de postman.
+Il est possible de directement importer le fichier dans postman afin de voir la documentation complète
