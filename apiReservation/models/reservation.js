@@ -1,7 +1,5 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Reservation extends Model {
     /**
@@ -15,16 +13,20 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'user_id',
         onDelete: 'SET NULL',
         onUpdate: 'CASCADE',
-      })
+      });
     }
   }
-  Reservation.init({
-    user_id: DataTypes.INTEGER,
-    flightNumber: DataTypes.STRING,
-    seatNumber: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'Reservation',
-  });
+  Reservation.init(
+    {
+      user_id: DataTypes.INTEGER,
+      flightNumber: DataTypes.STRING,
+      seatNumber: DataTypes.STRING,
+      statut: DataTypes.STRING,
+    },
+    {
+      sequelize,
+      modelName: 'Reservation',
+    }
+  );
   return Reservation;
 };

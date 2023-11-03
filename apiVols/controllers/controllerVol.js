@@ -16,7 +16,7 @@ const getFlightByNumber = async (req, res) => {
     });
 
     if (vols.length === 0) {
-      return res.status(404).json({ error: 'Aucun vol trouvé pour ce numéro de vol' });
+      return res.status(200).json({ error: 'Aucun vol trouvé pour ce numéro de vol' });
     }
 
     // Répondre avec les vols trouvés
@@ -136,6 +136,7 @@ const getStatutSeat = async (req, res) => {
     res.status(500).json({ error: 'Erreur lors de la recherche du siège' });
   }
 };
+
 const updateSeat = async (req, res) => {
   try {
     const flightNumber = req.params.flightNumber;
@@ -147,14 +148,16 @@ const updateSeat = async (req, res) => {
     });
 
     if (!vol) {
+      console.log('no flight');
       return res.status(404).json({ error: 'Vol non trouvé' });
     }
 
     // Vérifier si le siège existe dans le vol
     const siegeArray = vol.sieges.sieges;
-
+    console.log(siegeArray);
     const getIndexSiegeInArray = siegeArray.findIndex((siege) => siege.name === seatName);
     if (!siegeArray || getIndexSiegeInArray === -1) {
+      console.log('no seat');
       return res.status(404).json({ error: 'Siège non trouvé dans ce vol' });
     }
 
@@ -168,7 +171,7 @@ const updateSeat = async (req, res) => {
     await Vol.update({ ...newVol }, { where: { id: vol.id } });
 
     // Répondre avec les informations du siège
-    res.json(newVol);
+    res.status(200).json(newVol);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Erreur lors de la recherche du siège' });

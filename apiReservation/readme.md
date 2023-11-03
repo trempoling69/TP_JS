@@ -1,8 +1,8 @@
-## documentation de l'api VOLS
+## documentation d'utilisation de l'api
 
 - créer une base de donnée pour l'api
 - créer un ficher .env en utilisant le .env.exemple et le remplir
-- aller dans le terminal dans le répertoir de **apiVols** et lancer la commande suivante
+- aller dans le terminal dans le répertoir de **apiReservation** et lancer la commande suivante
 
 ```
 npm install
@@ -14,7 +14,7 @@ npm install
 npm run start
 ```
 
-- ouvrir un autre terminal en se mettant dans le même répertoir **apiVols** et lancer pour ajouter des données dans la db
+- ouvrir un autre terminal en se mettant dans le même répertoir **apiReservation** et lancer pour ajouter des données dans la db
 
 ```
 npx sequelize-cli db:seed:all
@@ -22,7 +22,8 @@ npx sequelize-cli db:seed:all
 
 - ouvrir avec postman la doc avec toutes les requêtes préparé
 
-### information supplémentaire
+
+## information supplémentaire
 
 -possible de lancer le serveur en dev Mode avec
 

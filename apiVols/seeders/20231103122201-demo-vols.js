@@ -23,8 +23,8 @@ module.exports = {
         date: '2023-11-03',
         sieges: {
           sieges: [
-            { name: 'A1', statut: 'disponible' },
-            { name: 'A2', statut: 'disponible' },
+            { name: 'A1', statut: 'indisponible' },
+            { name: 'A2', statut: 'indisponible' },
             { name: 'A3', statut: 'disponible' },
           ],
         },
@@ -51,7 +51,7 @@ module.exports = {
         date: '2023-11-05',
         sieges: {
           sieges: [
-            { name: 'A1', statut: 'disponible' },
+            { name: 'A1', statut: 'indisponible' },
             { name: 'A2', statut: 'disponible' },
             { name: 'A3', statut: 'disponible' },
           ],
@@ -65,9 +65,9 @@ module.exports = {
         date: '2023-11-06',
         sieges: {
           sieges: [
-            { name: 'A1', statut: 'disponible' },
+            { name: 'A1', statut: 'indisponible' },
             { name: 'A2', statut: 'disponible' },
-            { name: 'A3', statut: 'disponible' },
+            { name: 'A3', statut: 'indisponible' },
           ],
         },
         informationAeroplane: { model: 'Airbus A350', capacity: 234 },
